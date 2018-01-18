@@ -1,0 +1,42 @@
+﻿<Window x:Class="haies.Station" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        WindowStartupLocation="CenterScreen" MinWidth="400" Name="s" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Pump_read" 
+        FlowDirection="RightToLeft" Background="{StaticResource Background1}" WindowState="Maximized" Closed="Window_Closed">
+    <Grid Name="Main_GD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*" MinHeight="150" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Frame Grid.Row="1" NavigationUIVisibility="Hidden" BorderBrush="White" BorderThickness="0,2,0,0" Name="frame" Navigated="frame_Navigated" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource Label_TextBlock}" HorizontalAlignment="Center" Grid.Column="1" Text="{Binding ElementName=s, Path=Title}" FontSize="24"/>
+            <Button Style="{StaticResource Panel_Button}" Grid.Column="2" Name="Pervious_BTN" Content="Pervious" FlowDirection="LeftToRight" Tag="/haies;component/Images/Back.png" Click="Pervious_BTN_Click" />
+            <Button Style="{StaticResource Panel_Button}" Name="Next_BTN" Content="Next" Click="Next_BTN_Click" Tag="/haies;component/Images/Forward.png" />
+        </Grid>
+        <Border Grid.Row="2" BorderBrush="White" BorderThickness="0,2,0,0">
+        <Grid FlowDirection="LeftToRight">
+            <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="5" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Click="Button_Click_1" Content="Start Page" />
+                <Button Grid.Column="3" Click="Button_Click_2" Content="Customers" />
+                <Button Grid.Column="5" Click="Button_Click_3" Content="Gas Balance" />
+                <Button Grid.Column="7" Click="Button_Click_4" Content="Exit" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

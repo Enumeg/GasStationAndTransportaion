@@ -1,0 +1,23 @@
+﻿<Window x:Class="haies.Cars_Dates"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="600" Style="{StaticResource Win}" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1">
+            <DataGrid Style="{StaticResource dgv3}" Name="Dates_DG">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="إسم السيارة" Binding="{Binding Path=car_name}" />
+                    <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="رقم السيارة" Binding="{Binding Path=car_number}" />
+                    <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="البيان" Binding="{Binding Path=type}" />
+                    <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="تاريخ الإنتهاء" Binding="{Binding Path=end_date,StringFormat=yyyy/MM/dd}" />
+                    <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="عدد الأيام المتبقية" Binding="{Binding Path=days}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Button Grid.Row="1" Content="طباعة" Width="200" Click="Button_Click" />
+    </Grid>
+</Window>

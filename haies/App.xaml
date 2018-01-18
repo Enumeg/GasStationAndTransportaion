@@ -1,0 +1,26 @@
+﻿<Application x:Class="haies.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             >
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/haies;component/Styles/Label.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/TextBlock.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/EditPanel.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/Menu.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/Background.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/Window.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/TextBox.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/Button.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/ComboBox.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/ListBox.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/CheckBox.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/DatePicker.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/DataGrid.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/ContextMenu.xaml" />
+                <ResourceDictionary Source="/haies;component/Styles/Tab.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

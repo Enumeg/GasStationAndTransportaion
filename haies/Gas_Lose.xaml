@@ -1,0 +1,39 @@
+﻿<Window x:Class="haies.Gas_Lose" 
+      xmlns:ex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:cc="clr-namespace:Source;assembly=Source" 
+      Title="فاقد المحطة" Width="700" Height="400" Style="{StaticResource Win}">
+    <Grid DataContext="{Binding ElementName=Gas_Lose_DG, Path=SelectedItem}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="120" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="التاريخ :" Style="{StaticResource Label_TextBlock}" />
+        <TextBlock Grid.Column="2" Text="المحروق :" Style="{StaticResource Label_TextBlock}" />
+        <TextBlock Grid.Column="4" Text="الكميه :" Style="{StaticResource Label_TextBlock}" />
+        <ex:DateTimePicker Grid.Column="1" Grid.Row="0" Name="Date_TB" Style="{StaticResource Default_DateTimePicker}" />
+        <ComboBox Grid.Column="3" Grid.Row="0" Name="Gas_CB" Style="{StaticResource Edit_ComboBox}"  />
+        <TextBox Grid.Column="5" Grid.Row="0" Name="Amount_TB" Style="{StaticResource Edit_TextBox}" />
+        <Button Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="1" Content="حفظ" Name="add_update_outcome" Click="add_update_outcome_Click" Margin="5,0" />
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="7" Style="{StaticResource dgv3}" Name="Gas_Lose_DG" HorizontalScrollBarVisibility="Disabled">
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Collapsed" Binding="{Binding Path=gls_id}" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=gls_date,StringFormat=yyyy/MM/dd}" Header="التاريخ" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=gas}" Header="المحروق" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=gls_amount}" Header="الكميه المفقوده" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <cc:EditPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="7" Name="EP" Add="EP_Add" Edit="EP_Edit" Delete="EP_Delete" />
+    </Grid>
+</Window>

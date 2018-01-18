@@ -1,0 +1,52 @@
+﻿<Window x:Class="haies.Claims"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"   
+      xmlns:ex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" 
+      xmlns:cc="clr-namespace:Source;assembly=Source" 
+	FlowDirection="RightToLeft" Style="{StaticResource Win}" Background="{StaticResource Page_Background}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="38" />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="White" BorderThickness="2">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Style="{StaticResource Label_TextBlock}" Text="التاريخ :" />
+                <TextBlock Grid.Column="2" Style="{StaticResource Label_TextBlock}" Text="مـن :" />
+                <TextBlock Grid.Column="4" Style="{StaticResource Label_TextBlock}" Text="إلى :" />
+                <ex:DateTimePicker Grid.Column="1" Style="{StaticResource Search_DateTimePicker}" ValueChanged="From_DTP_ValueChanged" Name="Date_DTP" />
+                <ex:DateTimePicker Grid.Column="3" Style="{StaticResource Search_DateTimePicker}" ValueChanged="From_DTP_ValueChanged" Name="From_DTP" />
+                <ex:DateTimePicker Grid.Column="5" Style="{StaticResource Search_DateTimePicker}" ValueChanged="From_DTP_ValueChanged" Name="To_DTP" />
+            </Grid>
+        </Border>
+        <DataGrid Grid.Row="2" Style="{StaticResource dgv3}" Name="CLaims_DG">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="التاريخ" Binding="{Binding Path=clm_date,StringFormat=yyyy/MM/dd}" />
+                <DataGridTextColumn IsReadOnly="True" Header="من" Binding="{Binding Path=clm_from,StringFormat=yyyy/MM/dd}" />
+                <DataGridTextColumn IsReadOnly="True" Header="إلى" Binding="{Binding Path=clm_to,StringFormat=yyyy/MM/dd}" />
+                <DataGridTextColumn IsReadOnly="True" Header="الحالة" Binding="{Binding Path=clm_state,StringFormat=yyyy/MM/dd}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <cc:EditPanel Name="EP" Add="EP_Add" Edit="EP_Edit" Delete="EP_Delete"/>
+            <cc:SavePanel Name="SP" Save="SP_Save" Cancel="SP_Cancel" Visibility="Hidden"/>
+            <Button Grid.Column="1" Style="{StaticResource Panel_Button}" Tag="/haies;component/Images/analysis.ico" Content="عرض" Click="View_Click"/>
+        </Grid>
+    </Grid>
+
+</Window>

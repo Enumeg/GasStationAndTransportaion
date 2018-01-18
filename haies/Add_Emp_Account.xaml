@@ -1,0 +1,33 @@
+﻿<Window x:Class="haies.Add_Emp_Account" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:ex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+        Width="350" WindowStartupLocation="CenterScreen" 
+        Style="{StaticResource Win}" Title="حساب الموظف">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource Label_TextBlock}" Text="التاريـخ :"/>
+        <TextBlock Grid.Row="1" Style="{StaticResource Label_TextBlock}" Text="الرقــــم :" />
+        <TextBlock Grid.Row="2" Style="{StaticResource Label_TextBlock}" Text="الحساب :" />
+        <TextBlock Grid.Row="3" Style="{StaticResource Label_TextBlock}" Text="القيـمــة :" />
+        <TextBlock Grid.Row="4" Style="{StaticResource Label_TextBlock}" Text="البيـــان :" />
+        <ex:DateTimePicker Grid.Column="1" Grid.Row="0" Style="{StaticResource Default_DateTimePicker}" Name="Date_DTP" />
+        <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource Edit_TextBox}" Name="No_TB"/>
+        <ComboBox Grid.Column="1" Grid.Row="2" Style="{StaticResource Edit_ComboBox}" Name="Accounts_CB"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource Edit_TextBox}" Name="Value_TB"/>
+        <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource Edit_TextBox}" Name="Description_TB"/>
+        <CheckBox Grid.Column="0" Grid.Row="5" Name="New"  Content="جديد"/>
+        <Button Grid.Column="2" Grid.Row="5" Content="حفظ" Name="Add_Update_Advance" Click="Add_Update_Account_Click" />
+    </Grid>   
+</Window>

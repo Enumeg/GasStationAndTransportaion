@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5441903F-0CC9-4B9E-A05C-494A9ED72D70}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>haies</RootNamespace>
+    <AssemblyName>haies</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bullzip.PdfWriter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=041d71cacb6e853c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Bullzip.PdfWriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Collections">
+      <HintPath>..\..\CPrinting\CPrinting\bin\Release\Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="CPrinting">
+      <HintPath>..\..\CPrinting\CPrinting\bin\Release\CPrinting.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="Source">
+      <HintPath>..\..\Source\Source\bin\Release\Source.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Activities.Core.Presentation" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\..\..\programs\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Add_Emp_Account.xaml.cs">
+      <DependentUpon>Add_Emp_Account.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Add_Transactions.xaml.cs">
+      <DependentUpon>Add_Transactions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Add_Transportation.xaml.cs">
+      <DependentUpon>Add_Transportation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Archive.xaml.cs">
+      <DependentUpon>Archive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bank_Office.xaml.cs">
+      <DependentUpon>Bank_Office.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cars.xaml.cs">
+      <DependentUpon>Cars.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cars_Dates.xaml.cs">
+      <DependentUpon>Cars_Dates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Car_Owners.xaml.cs">
+      <DependentUpon>Car_Owners.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Advance.xaml.cs">
+      <DependentUpon>Advance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Categories.xaml.cs">
+      <DependentUpon>Categories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cement.xaml.cs">
+      <DependentUpon>Cement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cement_Office.xaml.cs">
+      <DependentUpon>Cement_Office.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cement_prices.xaml.cs">
+      <DependentUpon>Cement_prices.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Claim.cs" />
+    <Compile Include="Claims.xaml.cs">
+      <DependentUpon>Claims.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clients.xaml.cs">
+      <DependentUpon>Clients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Client_loans.xaml.cs">
+      <DependentUpon>Client_loans.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Currency\CurrencyInfo.cs" />
+    <Compile Include="Currency\ToWord.cs" />
+    <Compile Include="Customer.xaml.cs">
+      <DependentUpon>Customer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerAccounts.cs" />
+    <Compile Include="Customer_En.xaml.cs">
+      <DependentUpon>Customer_En.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customer_Pay.xaml.cs">
+      <DependentUpon>Customer_Pay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Drivers.xaml.cs">
+      <DependentUpon>Drivers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bank.xaml.cs">
+      <DependentUpon>Bank.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customer_Loans.xaml.cs">
+      <DependentUpon>Customer_Loans.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Car_Outcome.xaml.cs">
+      <DependentUpon>Car_Outcome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Add_Driver.xaml.cs">
+      <DependentUpon>Add_Driver.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Driver_Search.xaml.cs">
+      <DependentUpon>Driver_Search.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Employees.xaml.cs">
+      <DependentUpon>Employees.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs" />
+    <Compile Include="Suppliers.xaml.cs">
+      <DependentUpon>Suppliers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Factory_Installments.xaml.cs">
+      <DependentUpon>Factory_Installments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Factory_Page.xaml.cs">
+      <DependentUpon>Factory_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Future_Sales.xaml.cs">
+      <DependentUpon>Future_Sales.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gas.xaml.cs">
+      <DependentUpon>Gas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gas_Lose.xaml.cs">
+      <DependentUpon>Gas_Lose.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gas_Page.xaml.cs">
+      <DependentUpon>Gas_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gas_Page_EN.xaml.cs">
+      <DependentUpon>Gas_Page_EN.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gas_Price.xaml.cs">
+      <DependentUpon>Gas_Price.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Groups.xaml.cs">
+      <DependentUpon>Groups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="login.xaml.cs">
+      <DependentUpon>login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Monthly Accounts.xaml.cs">
+      <DependentUpon>Monthly Accounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Office_Account.xaml.cs">
+      <DependentUpon>Office_Account.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Outcome_Office.xaml.cs">
+      <DependentUpon>Outcome_Office.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pumps.xaml.cs">
+      <DependentUpon>Pumps.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pump_read.xaml.cs">
+      <DependentUpon>Pump_read.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Receipt.xaml.cs">
+      <DependentUpon>Receipt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Receipts.xaml.cs">
+      <DependentUpon>Receipts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Receipts_Office.xaml.cs">
+      <DependentUpon>Receipts_Office.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retainers.xaml.cs">
+      <DependentUpon>Retainers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Salaries.xaml.cs">
+      <DependentUpon>Salaries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Salary.xaml.cs">
+      <DependentUpon>Salary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Station.xaml.cs">
+      <DependentUpon>Station.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Station_Accounts.xaml.cs">
+      <DependentUpon>Station_Accounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Station_Accounts_View.xaml.cs">
+      <DependentUpon>Station_Accounts_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Station_Income.xaml.cs">
+      <DependentUpon>Station_Income.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Station_Outcome.xaml.cs">
+      <DependentUpon>Station_Outcome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Station_Purchases.xaml.cs">
+      <DependentUpon>Station_Purchases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\DatePicker.xaml.cs">
+      <DependentUpon>DatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\Tab.xaml.cs">
+      <DependentUpon>Tab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\Window.xaml.cs">
+      <DependentUpon>Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Places.xaml.cs">
+      <DependentUpon>Places.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Places_prices.xaml.cs">
+      <DependentUpon>Places_prices.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tax.xaml.cs">
+      <DependentUpon>Tax.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Totals.xaml.cs">
+      <DependentUpon>Totals.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions.xaml.cs">
+      <DependentUpon>Transactions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transportations.xaml.cs">
+      <DependentUpon>Transportations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transprtation.xaml.cs">
+      <DependentUpon>Transprtation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Units.xaml.cs">
+      <DependentUpon>Units.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Add_User.xaml.cs">
+      <DependentUpon>Add_User.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs" />
+    <Compile Include="UserLogs.xaml.cs">
+      <DependentUpon>UserLogs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Users.xaml.cs">
+      <DependentUpon>Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vacation.xaml.cs">
+      <DependentUpon>Vacation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View_Claims.xaml.cs">
+      <DependentUpon>View_Claims.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Add_Emp_Account.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Add_Transactions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Add_Transportation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Archive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Bank_Office.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Cars.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Cars_Dates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Categories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cement_Office.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cement_prices.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Claims.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Client_loans.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Customer_En.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Customer_Pay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Drivers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Add_Driver.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Driver_Search.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Employees.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Suppliers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Factory_Installments.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Factory_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Future_Sales.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gas_Lose.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gas_Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gas_Page_EN.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gas_Price.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Groups.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Car_Owners.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Advance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Bank.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Customer_Loans.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Car_Outcome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Monthly Accounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Office_Account.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Outcome_Office.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pumps.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pump_read.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Receipt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Receipts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Receipts_Office.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retainers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Salaries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Salary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Station.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Station_Accounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Station_Accounts_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Station_Income.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Station_Outcome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Station_Purchases.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Background.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\CheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ContextMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\DataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\DatePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\EditPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Label.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Menu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Tab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Places.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Places_prices.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tax.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Totals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Transactions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Transportations.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transprtation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Units.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Add_User.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserLogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Users.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vacation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View_Claims.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Actions-resource-group.ico" />
+    <Resource Include="Images\Back.png" />
+    <Resource Include="Images\bank-icon.png" />
+    <Resource Include="Images\cement.png" />
+    <Resource Include="Images\chorus.ico" />
+    <Resource Include="Images\d.png" />
+    <Resource Include="Images\Factory.png" />
+    <Resource Include="Images\Gas-pump.ico" />
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\Text-align--justify.ico" />
+    <Resource Include="Images\Truck.png" />
+    <Resource Include="Images\trucks.png" />
+    <Resource Include="Images\Users.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Budget.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\refresh1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\backup-vault.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\analysis.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\home.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logout.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\printer-green.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cancel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\printer-blue.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Activate.ico" />
+    <Resource Include="Images\Archive.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\IBTN.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\question_mark_icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\header.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

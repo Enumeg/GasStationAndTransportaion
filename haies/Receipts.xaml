@@ -1,0 +1,129 @@
+﻿<Page x:Class="haies.Receipts" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:cc="clr-namespace:Source;assembly=Source" xmlns:ex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="1208" Title="الفسوحات" FlowDirection="RightToLeft" Background="#FF140F14" FontFamily="Arial" FontSize="18">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="White" BorderThickness="0,0,0,2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />                 
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Style="{StaticResource Label_TextBlock}" Text="طريقة الدفع :" />
+                <TextBlock Grid.Column="2" Style="{StaticResource Label_TextBlock}" Text="مـن :" />
+                <TextBlock Grid.Column="4" Style="{StaticResource Label_TextBlock}" Text="إلى :" />
+                <TextBlock Grid.Column="6" Style="{StaticResource Label_TextBlock}" Text="رقم الفسح :" />
+                <TextBlock Grid.Column="8" Style="{StaticResource Label_TextBlock}" Text="السائق :" />
+                <TextBlock Grid.Column="10" Style="{StaticResource Label_TextBlock}" Text="نوع الحمولة :" />
+                <ComboBox Grid.Column="1" Style="{StaticResource Search_ComboBox}" Name="State_CB" SelectionChanged="Customer_CB_SelectionChanged" SelectedIndex="0">
+                    <ComboBoxItem Content="الكل"/>
+                    <ComboBoxItem Content="نقدي" />
+                    <ComboBoxItem Content="آجل" />
+                </ComboBox>
+                <ex:DateTimePicker Grid.Column="3" Style="{StaticResource Search_DateTimePicker}" ValueChanged="From_DTP_ValueChanged" Name="From_DTP" />
+                <ex:DateTimePicker Grid.Column="5" Style="{StaticResource Search_DateTimePicker}" ValueChanged="From_DTP_ValueChanged" Name="To_DTP" />
+                <TextBox Grid.Column="7" Style="{StaticResource Search_TextBox}" Name="Receipt_Number_TB" TextChanged="Receipt_Number_TB_TextChanged" />
+                <ComboBox Grid.Column="9" Style="{StaticResource Search_ComboBox}" Name="Driver_CB" SelectionChanged="Customer_CB_SelectionChanged" />
+                <ComboBox Grid.Column="11" Style="{StaticResource Search_ComboBox}" Name="Cement_CB" SelectionChanged="Customer_CB_SelectionChanged" />
+                <Button Grid.Column="12" Content="طباعة" Margin="10,0" Click="Button_Click" />
+            </Grid>
+        </Border>
+       
+            <DataGrid Grid.Row="1" Style="{StaticResource dgv3}" Name="Receipt_DG"  CellEditEnding="Receipt_DG_CellEditEnding" >
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="DarkBlue" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Padding" Value="5" />
+                    
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding rec_id}" Value="{x:Null}">
+                            <Setter Property="Background" Value="DarkBlue" />
+                            <Setter Property="Foreground" Value="White" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding rec_sell_price}" Value="0.00">
+                            <Setter Property="Background" Value="DarkRed" />
+                            <Setter Property="Foreground" Value="White" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="Padding" Value="10,5" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="FontFamily" Value="Arial" />                
+                    <Setter Property="BorderThickness" Value="1,0,0,0" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="DataGridCell">
+                                <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="Gray" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Collapsed" Binding="{Binding Path=rec_id}" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=trs_date,StringFormat=yyyy/MM/dd}" Header="التاريخ" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=rec_number}" Header="رقم الفسح" />                           
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=per_name}" Header="السائق" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=car_number}" Header="السيارة" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=cem_name}" Header="نوع الحمولة" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=unit_name}" Header="الوحده" />
+                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Path=rec_amount}" Header="الكميه" />
+                <DataGridTextColumn IsReadOnly="True" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=rec_sell_price}" Header="ثمن البيع" FontSize="14" FontWeight="Normal"/>
+                <DataGridTextColumn IsReadOnly="True" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=rec_buy_price}" Header="ثمن الشراء" FontSize="14" FontWeight="Normal"/>
+                <DataGridTextColumn IsReadOnly="True" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=trs_discount}" Header="الخصم" FontSize="14" FontWeight="Normal" />
+                <DataGridTextColumn IsReadOnly="True" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=rec_net}" Header="هامش الربح" FontSize="14" FontWeight="Normal"/>
+                <DataGridTextColumn IsReadOnly="True" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=trs_paid}" Header="المدفوع" FontSize="14" FontWeight="Normal"/>
+                <DataGridTextColumn IsReadOnly="True" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=trs_rest}" Header="الباقي" FontSize="14" FontWeight="Normal"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=cstl_value}" Header="المسدد" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=cstl_date}" Header="تاريخ السداد" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=rest}" Header="المتبقي" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path=trs_payment_method}" Header="طريقة الدفع" />
+                <DataGridTemplateColumn Header="يعدل">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Path=trs_is_editable}" Tag="{Binding Path=trs_id}" Click="CheckBox_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <cc:EditPanel Name="Receipt_EP" Add="Receipt_EP_Add" Edit="Receipt_EP_Edit" Delete="Receipt_EP_Delete" />
+            <Button Grid.Column="1" Content="المبيعات الأجلة" Style="{StaticResource Panel_Button}" Tag="/haies;component/Images/Cancel.ico" Click="Button_Click_1" />
+            <Button Grid.Column="2" Content="الملخص" Style="{StaticResource Panel_Button}" Tag="/haies;component/Images/Budget.png" Click="Button_Click_2" />
+        </Grid>
+    </Grid>
+</Page>

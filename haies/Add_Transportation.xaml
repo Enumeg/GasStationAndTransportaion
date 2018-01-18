@@ -1,0 +1,63 @@
+﻿<Page x:Class="haies.Add_Transportation" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" Title="الفسحات" FlowDirection="RightToLeft" mc:Ignorable="d"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="451"
+        d:DesignWidth="1105" Background="{StaticResource Background1}">
+    <Grid Name="Main_GD" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="60*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource Label_TextBlock}" Text="المورد :" />
+        <TextBlock Grid.Row="1" Style="{StaticResource Label_TextBlock}" Text="التاريخ :" />
+        <TextBlock Grid.Row="2" Style="{StaticResource Label_TextBlock}" Text="النوع :" />
+        <TextBlock Grid.Row="3" Style="{StaticResource Label_TextBlock}" Text="الوحده :" />
+        <TextBlock Grid.Row="4" Style="{StaticResource Label_TextBlock}" Text="الكميه :" />
+        <TextBlock Grid.Row="5" Style="{StaticResource Label_TextBlock}" Text="العميل :" />
+        <TextBlock Grid.Row="6" Style="{StaticResource Label_TextBlock}" Text="الإتجاه :" />
+        <TextBlock Grid.Row="7" Style="{StaticResource Label_TextBlock}" Text="السائـق :" />
+        <!---->    
+        <TextBlock Grid.Row="0" Grid.Column="3" Style="{StaticResource Label_TextBlock}" Text="رقم الفاتورة :"  Width="60" TextWrapping="Wrap"/>
+        <TextBlock Grid.Row="1" Grid.Column="3" Style="{StaticResource Label_TextBlock}" Text="السيــارة :" />
+        <TextBlock Grid.Row="2" Grid.Column="3" Style="{StaticResource Label_TextBlock}" Text="الســعــر :" />
+        <TextBlock Grid.Row="3" Grid.Column="3" Style="{StaticResource Label_TextBlock}" Text="الإجمالي :" />
+        <TextBlock Grid.Row="4" Grid.Column="3" Style="{StaticResource Label_TextBlock}" Text="الخصـــم :" />
+        <TextBlock Grid.Row="5" Grid.Column="3" Style="{StaticResource Label_TextBlock}" Text="المدفــوع :" />
+        <TextBlock Grid.Row="6" Grid.Column="3" Style="{StaticResource Label_TextBlock}" Text="البـــــاقي :" />
+        <TextBlock Grid.Row="7" Grid.Column="3" Style="{StaticResource Label_TextBlock}" Text="طريقة الدفع :" />
+         <!---->
+        <ComboBox Grid.Column="1" Grid.Row="0" Style="{StaticResource Search_ComboBox}" Name="Supplier_CB" SelectionChanged="Cement_CB_SelectionChanged" />
+        <ex:DateTimePicker Grid.Column="1" Grid.Row="1" Name="Date_TB" Style="{StaticResource Search_DateTimePicker}" />
+        <ComboBox Grid.Column="1" Grid.Row="2" Style="{StaticResource Search_ComboBox}" Name="Cement_CB" SelectionChanged="Cement_CB_SelectionChanged" />
+        <ComboBox Grid.Column="1" Grid.Row="3" Style="{StaticResource Search_ComboBox}" Name="Unit_CB" SelectionChanged="Cement_CB_SelectionChanged" />
+        <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource Search_TextBox}" Name="Amount_TB" TextChanged="Amount_TB_TextChanged" />
+        <ComboBox Grid.Column="1" Grid.Row="5" Style="{StaticResource Search_ComboBox}" Name="Customer_CB" SelectionChanged="Customer_CB_SelectionChanged" />
+        <ComboBox Grid.Column="1" Grid.Row="6" Style="{StaticResource Search_ComboBox}" Name="Place_CB" SelectionChanged="Place_CB_SelectionChanged" />
+        <ComboBox Grid.Column="1" Grid.Row="7" Style="{StaticResource Search_ComboBox}" Name="Driver_CB" SelectionChanged="Driver_CB_SelectionChanged" />
+        <!---->
+        <TextBox Grid.Column="4" Grid.Row="0" Style="{StaticResource Search_TextBox}" Name="Bill_Num_TB" />
+        <ComboBox Grid.Column="4" Grid.Row="1" Style="{StaticResource Search_ComboBox}" SelectedValue="{Binding trs_car_id}" Name="Car_CB"/>
+        <TextBox Grid.Column="4" Grid.Row="2" Style="{StaticResource Search_TextBox}" Name="Unit_Price_TB" IsReadOnly="True" />
+        <TextBox Grid.Column="4" Grid.Row="3" Style="{StaticResource Search_TextBox}" Name="Total_Paice_TB" IsReadOnly="True" />
+        <TextBox Grid.Column="4" Grid.Row="4" Style="{StaticResource Search_TextBox}" Name="Discount_TB" TextChanged="Discount_TB_TextChanged" Text="0"/>
+        <TextBox Grid.Column="4" Grid.Row="5" Style="{StaticResource Search_TextBox}" Name="Paid_TB"  TextChanged="Discount_TB_TextChanged" Text="0"/>
+        <TextBox Grid.Column="4" Grid.Row="6" Style="{StaticResource Search_TextBox}" Name="Rest_TB" IsReadOnly="True" />
+        <TextBox Grid.Column="4" Grid.Row="7" Style="{StaticResource Search_TextBox}" Name="Payment_Method_TB" Text="{Binding trs_payment_method}"/>
+
+          <!---->
+        <Button Grid.ColumnSpan="5" Grid.Row="10" Content="حفظ" Click="Button_Click" Width="200" />
+    </Grid>
+</Page>

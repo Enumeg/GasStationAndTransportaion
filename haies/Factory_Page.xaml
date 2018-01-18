@@ -1,0 +1,110 @@
+﻿<Page x:Class="haies.Factory_Page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:cc="clr-namespace:Source;assembly=Source" 
+      xmlns:ex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" mc:Ignorable="d" 
+      d:DesignHeight="173" d:DesignWidth="845"
+	Title="Factory_Page" Background="#FF320000" FlowDirection="RightToLeft" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="38" />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="White" BorderThickness="0,0,0,2">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />                    
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />                    
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Style="{StaticResource Label_TextBlock}" Text="المورد :" />
+                <TextBlock Grid.Column="2" Style="{StaticResource Label_TextBlock}" Text="مـن :" />
+                <TextBlock Grid.Column="4" Style="{StaticResource Label_TextBlock}" Text="إلى :" />
+                <ComboBox Grid.Column="1" Style="{StaticResource Search_ComboBox}" SelectionChanged="ComboBox_SelectionChanged" Name="Suppliers_CB" />
+                <ex:DateTimePicker Grid.Column="3" Style="{StaticResource Search_DateTimePicker}" ValueChanged="From_DTP_ValueChanged" Name="From_DTP" />
+                <ex:DateTimePicker Grid.Column="5" Style="{StaticResource Search_DateTimePicker}" ValueChanged="From_DTP_ValueChanged" Name="To_DTP" />
+                <Button Grid.Column="6" Content="كشف حساب المصنع" Margin="0,0,10,0" Click="Button_Click_1" />
+            </Grid>
+        </Border>
+        <DataGrid Grid.Row="2" Style="{StaticResource dgv3}" Name="Factory_DG">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="DarkBlue" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Padding" Value="5" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding fac_out}" Value="{x:Null}">                   
+                            <Setter Property="Foreground" Value="Green" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Collapsed" Binding="{Binding Path=fac_id}" />                
+                <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="مدين" Binding="{Binding Path=fac_in}" />
+                <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="دائن" Binding="{Binding Path=fac_out}" />
+                <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="الرصيد" Binding="{Binding Path=fac_Balance}">
+                    <DataGridTextColumn.CellStyle>                    
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="Padding" Value="10,5" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontFamily" Value="Arial" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="BorderThickness" Value="1,0,0,0" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="DataGridCell">
+                                            <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Background" Value="Gray" />
+                                                </Trigger>
+                                            <DataTrigger Binding="{Binding Min}" Value="True">
+                                                <Setter Property="Foreground" Value="Red" />
+                                            </DataTrigger>
+                                        </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>                      
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                    <DataGridTextColumn Width="*" IsReadOnly="True" Header="البيان" Binding="{Binding Path=fac_description}" />
+                <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="رقم الفسح" Binding="{Binding Path=Rec_number}" />
+                <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="التاريخ" Binding="{Binding Path=fac_date,StringFormat=yyyy/MM/dd}" />
+                <DataGridTextColumn Visibility="Collapsed" Binding="{Binding Path=Min}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="5" />
+            </Grid.ColumnDefinitions>
+                <cc:EditPanel Name="EP" Add="EP_Add" Edit="EP_Edit" Delete="EP_Delete"
+                      cc:EditPanel.Add_String="إضافة رصيد" cc:EditPanel.Edit_String="تعديل رصيد" cc:EditPanel.Delete_String="حذف رصيد"/>
+            <TextBlock Grid.Column="1" Text="الحد الأدنى للرصيد :" Style="{StaticResource Label_TextBlock}" />
+            <TextBox Grid.Column="2" Style="{StaticResource View_TextBox}" Name="Least_TB" />
+            <cc:SavePanel Grid.Column="4" Visibility="Collapsed" Name="Save_Panel" Save="SavePanel_Save" Cancel="SavePanel_Cancel" />
+            <Button Grid.Column="4"  Content="تعديل" Click="Button_Click" Name="Edit_BTN" />
+        </Grid>
+    </Grid>
+</Page>

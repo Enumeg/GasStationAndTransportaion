@@ -1,0 +1,30 @@
+﻿<Window x:Class="haies.Add_Driver"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"       
+        Title="السائقين" Width="380" Style="{StaticResource Win}" WindowStartupLocation="CenterScreen">
+    <Grid Name="Main_GD">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />                
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource Label_TextBlock}" Text="إســـم السائق :" />
+        <TextBlock Grid.Row="1" Style="{StaticResource Label_TextBlock}" Text="جوال السائق :" />
+        <TextBlock Grid.Row="2" Style="{StaticResource Label_TextBlock}" Text="منطقة السائق :" />
+        <TextBlock Grid.Row="3" Style="{StaticResource Label_TextBlock}" Text="رقـم السيــارة :" />
+        <TextBlock Grid.Row="4" Style="{StaticResource Label_TextBlock}" Text="الكفيــل :" />        
+        <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource Edit_TextBox}" Name="Driver_Name_TB" />
+        <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource Edit_TextBox}" Name="Driver_Mobile_TB" />
+        <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource Edit_TextBox}" Name="Driver_Address_TB" />
+        <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource Edit_TextBox}" Name="Car_Number" />
+        <ComboBox Grid.Column="1" Grid.Row="4" Style="{StaticResource Edit_ComboBox}" Name="Sponser_CB"  SelectionChanged="Sponser_CB_SelectionChanged"/>
+        <Button Grid.Column="1" Grid.Row="5" Content="حفظ" Name="add_update_outcome" Click="add_update_outcome_Click" />
+    </Grid>
+</Window>

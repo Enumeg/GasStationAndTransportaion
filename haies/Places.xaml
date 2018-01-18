@@ -1,0 +1,23 @@
+﻿<Window x:Class="haies.Places"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cc="clr-namespace:Source;assembly=Source"  Title="المناطق" 
+        Style="{StaticResource Win}" Width="300"  WindowStartupLocation="CenterScreen" >
+    <Grid Name="Main_GD">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="0" />
+            <RowDefinition Height="300" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="المنطقه :" Style="{StaticResource Label_TextBlock}" />
+        <TextBox Grid.Column="1" Name="Place_TB" Style="{StaticResource Edit_TextBox}" TextChanged="Place_TB_TextChanged" />
+        <Button Grid.Column="1" Grid.Row="1" Content="حفظ" Name="add_update_outcome" Click="add_update_outcome_Click" />
+        <ListBox  Grid.Row="2" Grid.ColumnSpan="2" Name="LB" BorderThickness="0" SelectionChanged="LB_SelectionChanged" />
+        <cc:EditPanel Grid.Row="3" Grid.ColumnSpan="2" Add="EP_Add" Edit="EP_Edit" Delete="EP_Delete"/>
+    </Grid>
+</Window>

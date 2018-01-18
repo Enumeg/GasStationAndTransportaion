@@ -1,0 +1,81 @@
+﻿<Page x:Class="haies.Transactions"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"    
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
+      xmlns:ex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+      xmlns:cc="clr-namespace:Source;assembly=Source" 
+      FlowDirection="RightToLeft" Background="{StaticResource Page_Background}">
+    <Grid Name="Main_GD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0" />
+            <RowDefinition Height="0" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="White" BorderThickness="0,0,0,2">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Style="{StaticResource Label_TextBlock}" Text="الحساب :" />
+                <TextBlock Grid.Column="2" Style="{StaticResource Label_TextBlock}" Text="مـن :" />
+                <TextBlock Grid.Column="4" Style="{StaticResource Label_TextBlock}" Text="إلى :" />
+                <TextBlock Grid.Column="6" Style="{StaticResource Label_TextBlock}" Text="من/إلى :" />
+                <ComboBox Grid.Column="1" Style="{StaticResource Search_ComboBox}" SelectionChanged="ComboBox_SelectionChanged" Name="Type_CB">
+                    <ComboBoxItem>الخزينة</ComboBoxItem>
+                    <ComboBoxItem>سندات القبض</ComboBoxItem>
+                    <ComboBoxItem>سندات الصرف</ComboBoxItem>
+                </ComboBox>
+                <ex:DateTimePicker Grid.Column="3" Style="{StaticResource Search_DateTimePicker}" ValueChanged="From_DTP_ValueChanged" Name="From_DTP" />
+                <ex:DateTimePicker Grid.Column="5" Style="{StaticResource Search_DateTimePicker}" ValueChanged="From_DTP_ValueChanged" Name="To_DTP" />
+                <TextBox Grid.Column="7" Style="{StaticResource Search_TextBox}" TextChanged="Person_TB_TextChanged" Name="Person_TB"/>
+            </Grid>
+        </Border>
+        <DataGrid Grid.Row="2" Style="{StaticResource dgv3}" Name="Safe_DG">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="مدين" Binding="{Binding Path=income}" />
+                <DataGridTextColumn IsReadOnly="True" Header="دائن" Binding="{Binding Path=outcome}" />
+                <DataGridTextColumn IsReadOnly="True" Header="الرصيد" Binding="{Binding Path=Balance}" />
+                <DataGridTextColumn Width="*" IsReadOnly="True" Header="البيان" Binding="{Binding Path=trc_description}" />
+                <DataGridTextColumn IsReadOnly="True" Header="من/إلى" Binding="{Binding Path=Person}" />
+                <DataGridTextColumn IsReadOnly="True" Header="النوع" Binding="{Binding Path=Type}" />
+                <DataGridTextColumn IsReadOnly="True" Header="رقم السند" Binding="{Binding Path=trc_number}" />
+                <DataGridTextColumn IsReadOnly="True" Header="التاريخ" Binding="{Binding Path=trc_date,StringFormat=yyyy/MM/dd}" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Grid.Row="3" Style="{StaticResource dgv3}" Name="Transactions_DG">
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Collapsed" Binding="{Binding Path=trc_id}" />
+                <DataGridTextColumn IsReadOnly="True" Header="القيمة" Binding="{Binding Path=trc_value}" />
+                <DataGridTextColumn Width="*" IsReadOnly="True" Header="البيان" Binding="{Binding Path=trc_description}" />
+                <DataGridTextColumn IsReadOnly="True" Header="من" Binding="{Binding Path=Person}" x:Name="Person_CB" />
+                <DataGridTextColumn IsReadOnly="True" Header="نقداً/شيك" Binding="{Binding Path=Pay}" />
+                <DataGridTextColumn IsReadOnly="True" Header="رقم السند" Binding="{Binding Path=trc_number}" />
+                <DataGridTextColumn IsReadOnly="True" Header="التاريخ" Binding="{Binding Path=trc_date,StringFormat=yyyy/MM/dd}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <cc:EditPanel Name="EP" Add="EP_Add" Edit="EP_Edit" Delete="EP_Delete"/>
+            <Button Grid.Column="1" Style="{StaticResource Panel_Button}" Tag="/haies;component/Images/printer-blue.ico" Content="طباعة سند" Click="Button_Click"/>
+            <Button Grid.Column="2" Style="{StaticResource Panel_Button}" Tag="/haies;component/Images/printer-blue.ico" Content="طباعة الكل" Click="Button_Click_1"/>
+        </Grid>
+        <Grid Grid.Row="5">
+            <Button Style="{StaticResource Panel_Button}" Tag="/haies;component/Images/printer-blue.ico" Content="طباعة" Click="Button_Click_2"/>
+        </Grid>
+    </Grid>
+</Page>

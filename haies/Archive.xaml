@@ -1,0 +1,58 @@
+﻿<Page x:Class="haies.Archive" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" xmlns:cc="clr-namespace:Source;assembly=Source"
+        FlowDirection="RightToLeft" Background="{StaticResource Background1}" MinHeight="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="White" BorderThickness="0,0,2,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="35" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Style="{StaticResource Label_TextBlock}" Text="الفئـة :" />
+                <TextBlock Grid.Row="1" Style="{StaticResource Label_TextBlock}" Text="الإسم :" />
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" >
+                    <ComboBox Style="{StaticResource Search_ComboBox}" Name="Category_Search_CB" SelectionChanged="Fill_LB" Width="150"/>
+                    <Button Style="{StaticResource Panel_Button}" Tag="/haies;component/Images/analysis.ico" Click="Button_Click" />
+                </StackPanel>
+                <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource Search_TextBox}" Name="Title_Search_TB" TextChanged="Fill_LB" />
+                <ListBox Grid.Row="2" Grid.ColumnSpan="2" Name="LB" SelectionChanged="LB_SelectionChanged" />
+                <cc:EditPanel Grid.Row="4" Grid.ColumnSpan="2" Name="EP" Add="EditPanel_Add" Edit="EditPanel_Edit" Delete="EditPanel_Delete" />
+            </Grid>
+        </Border>
+        <Grid DataContext="{Binding ElementName=LB, Path=SelectedItem}" Name="Main_Grid" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Style="{StaticResource Label_TextBlock}" Text="الفئة :" />
+                <TextBlock Grid.Column="2" Style="{StaticResource Label_TextBlock}" Text="الإسم :" />
+                <ComboBox Grid.Column="1" Style="{StaticResource View_ComboBox}" SelectedValue="{Binding Path=arc_cat_id}" Name="Category_CB" />
+                <TextBox Grid.Column="3" Style="{StaticResource View_TextBox}" Text="{Binding Path=arc_title}" Name="Title_TB" />
+            </Grid>
+            <Border Grid.Row="1" BorderBrush="White" BorderThickness="0,2">
+                <Image Name="Img" MouseLeave="Img_MouseLeave" MouseEnter="Img_MouseEnter" Source="/haies;component/Images/question_mark_icon.jpg" Stretch="Fill" />
+            </Border>
+            <Button Name="BTNImg" Grid.Row="1" Style="{StaticResource Img}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Hidden"
+                    Click="BTNImg_Click" />
+            <cc:SavePanel Grid.Row="2" Save="Save_Panel_Save" Cancel="Save_Panel_Cancel" />
+        </Grid>
+    </Grid>
+</Page>

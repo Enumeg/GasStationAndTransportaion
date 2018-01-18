@@ -1,0 +1,25 @@
+﻿<Window x:Class="haies.Cement_Office" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Closed="Window_Closed" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Cement_Office" Height="476" Width="1000" Background="{StaticResource Background1}" WindowState="Maximized">
+    <Grid Name="Main_GD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" MinHeight="150" />
+        </Grid.RowDefinitions>
+        <Grid FlowDirection="RightToLeft">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />               
+                <ColumnDefinition Width="*" />            
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Style="{StaticResource Tabs}" Margin="1,2" Click="Button_Click_1" Tag="/haies;component/Images/cement.png" Name="btn" Content="المشتريات/الفُسوحات" />
+            <Button Grid.Column="1" Style="{StaticResource Tabs}" Margin="1,2" Click="Button_Click_2" Content="إتجاه الشاحنة" Tag="/haies;component/Images/Truck.png" />
+            <Button Grid.Column="2" Style="{StaticResource Tabs}" Margin="1,2" Click="Button_Click_5" Content="نقل أجرة" Tag="/haies;component/Images/Trucks.png" />
+            <Button Grid.Column="3" Style="{StaticResource Tabs}" Margin="1,2" Click="Button_Click_3" Content="الحسابات" Tag="/haies;component/Images/Text-align--justify.ico"/>
+            <Button Grid.Column="4" Style="{StaticResource Tabs}" Margin="1,2" Click="Button_Click_6" Content="المبيعات الآجلة" Tag="/haies;component/Images/chorus.ico" />
+            <Button Grid.Column="5" Style="{StaticResource Tabs}" Margin="1,2" Click="Button_Click_4" Content="خروج" Tag="/haies;component/Images/logout.ico" />
+        </Grid>
+        <Frame Grid.Row="1" NavigationUIVisibility="Hidden" BorderBrush="White" BorderThickness="0,2,0,0" Name="frame" />
+    </Grid>
+</Window>

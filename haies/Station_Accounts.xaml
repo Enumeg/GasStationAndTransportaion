@@ -1,0 +1,142 @@
+﻿ <Page x:Class="haies.Station_Accounts" 
+      xmlns:ex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" 
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      FlowDirection="RightToLeft" Title="الحسابات - Accounts">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="التــــاريخ :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Text="Date :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="1" Text="الرصــــيد السابــــق :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="2" Text="إجمالــي المبيعــــات :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="3" Text="إجمالي المدفوعــات :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="4" Text="المبيعــــات الآجلـــة :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="5" Text="المبيـعــات النقـديـــة :" Style="{StaticResource Label_TextBlock}" />        
+            <TextBlock Grid.Row="6" Text="إجمالي المصروفات :" Style="{StaticResource Label_TextBlock}" />                
+            <TextBlock Grid.Row="7" Text="صافي دخل المحطة:" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="8" Text="إجمالي إيداع البنــك :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="9" Text="الرصيــــــــــــــــــد :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="10" Text="إجمالي المشتريـــات :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="1" Text="Last Balance :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="2" Text="Total Sales :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="3" Text="Total Payments :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="4" Text="Futures Sales :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="5" Text="cash Sales :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="6" Text="Total Outcome :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="7" Text="Total Income :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="8" Text="Bank Deposits :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="9" Text="Balance :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="10" Text="Total Purchases :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <ex:DateTimePicker Grid.Column="1" Grid.Row="0" Name="Date_TB" Style="{StaticResource Default_DateTimePicker}" ValueChanged="Date_TB_ValueChanged" />
+            <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Last_Bal_TK" />
+            <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Sales_TK" />
+            <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Payments_TK" />
+            <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Futures_Sales_TK" />
+            <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="cash_Sales_TK" />    
+            <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Outcome_TK" />
+            <TextBlock Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Income_TK" />
+            <TextBlock Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Bank_TK" />
+            <TextBlock Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Balance_TK" />
+            <TextBlock Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Purchases_TK" />
+            <Button Grid.Row="11" Grid.Column="1" Content="Print" Click="Button_Click" />
+        </Grid>
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Style="{StaticResource Header_Label_1}" Content="Counter Read" />
+                <Label Grid.Row="2" Style="{StaticResource Header_Label_1}" Content="Gas Balance" />
+                <DataGrid Grid.Row="1" Style="{StaticResource dgv3}" Name="Pumps_DG" FlowDirection="LeftToRight">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="DarkBlue" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Padding" Value="5" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding pum_number}" Value="{x:Null}">
+                                    <Setter Property="Background" Value="DarkBlue" />
+                                    <Setter Property="Foreground" Value="White" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Visibility="Collapsed" Binding="{Binding Path=pmr_id}" />
+                        <DataGridTextColumn Width="Auto" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=gas_name}" Header="Gas" />
+                        <DataGridTextColumn Width="Auto" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=pum_number}" Header="Pump" />
+                        <DataGridTextColumn Width="Auto" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=pmr_today}" Header="Yesterday Read" />
+                        <DataGridTextColumn Width="Auto" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=pmr_yesterday}" Header="Today Read" />
+                        <DataGridTextColumn Width="Auto" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=pmr_amount}" Header="Sales Amount" />
+                        <DataGridTextColumn Width="Auto" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=pmr_value}" Header="Sales Value" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid Grid.Row="3" Style="{StaticResource dgv3}" Name="Gas_DG" FlowDirection="LeftToRight">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="Gas" Binding="{Binding Path=type}" />
+                        <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="95" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=gas1}" />
+                        <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="91" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=gas2}" />
+                        <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="D" CellStyle="{StaticResource DGCLA}" Binding="{Binding Path=gas3}" />                        
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="1" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource Header_Label_1}" Content="Outcome" />
+                    <Label Grid.Column="2" Style="{StaticResource Header_Label_1}" Content="Sales" />
+                    <DataGrid Grid.Row="1" Style="{StaticResource dgv3}" Name="Outcome_DG" FlowDirection="LeftToRight">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding Path=sout_description}" Header="Description" />
+                            <DataGridTextColumn Width="Auto" Binding="{Binding Path=sout_value}" Header="Value" CellStyle="{StaticResource DGCLA}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid Grid.Row="1" Style="{StaticResource dgv3}" Name="Sales_DG" FlowDirection="LeftToRight" Grid.Column="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Visibility="Collapsed" Binding="{Binding Path=sin_id}" />
+                            <DataGridTextColumn Width="Auto" Binding="{Binding Path=custo}" Header="Customer" />
+                            <DataGridTextColumn Width="Auto" Binding="{Binding Path=gas_name}" Header="Gas" />
+                            <DataGridTextColumn Width="Auto" Binding="{Binding Path=sin_amount}" Header="Amount" CellStyle="{StaticResource DGCLA}"/>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding Path=sin_cost}" Header="Price" CellStyle="{StaticResource DGCLA}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Border Grid.Column="1" Grid.RowSpan="2" Background="Black" />
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

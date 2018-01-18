@@ -1,0 +1,32 @@
+﻿<Window x:Class="haies.Main" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FlowDirection="RightToLeft"
+        Width="650"  WindowStartupLocation="CenterScreen" Style="{StaticResource Win}" Closed="Window_Closed">
+    <Grid HorizontalAlignment="Center" Margin="0,-50,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />         
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.ColumnSpan="3" Text="مؤسسة بن هايس التجارية" Style="{StaticResource Label_TextBlock}" TextAlignment="Center" FontSize="24" />
+        <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource Tabs}" Name="Cement_BTN" Click="Cement_BTN_Click" Content="مكتب المالية" Tag="/haies;component/Images/cement.png" />
+        <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource Tabs}" Name="Cem_en_BTN" Click="Cem_en_BTN_Click"  Content="مدخل المبيعات" Tag="/haies;component/Images/cement.png" />
+        <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource Tabs}" Name="Statio_BTN" Click="Statio_BTN_Click" Content="المحطة" Tag="/haies;component/Images/Gas-pump.ico" />
+        <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource Tabs}" Name="Sta_en_BTN" Click="Sta_en_BTN_Click" Content="مدخل المحطة" Tag="/haies;component/Images/Gas-pump.ico" />
+        <Button Grid.Row="5" Grid.Column="0" Style="{StaticResource Tabs}" Name="Employ_BTN" Click="Employ_BTN_Click" Content="الموظفين" Tag="/haies;component/Images/chorus.ico" />
+        <Button Grid.Row="5" Grid.Column="2" Style="{StaticResource Tabs}" Name="Userss_BTN" Click="Userss_BTN_Click" Content="المستخدمين" Tag="/haies;component/Images/Users.ico"/>
+        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource Tabs}" Name="Exit_l_BTN" Click="Exit_l_BTN_Click" Content="خروج" Tag="/haies;component/Images/logout.ico" />
+    </Grid>
+    
+</Window>

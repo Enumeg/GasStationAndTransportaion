@@ -1,0 +1,28 @@
+﻿<Window x:Class="haies.login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Foreground="DarkRed"
+        Width="350" Title="مؤسسة بن هايس التجارية" Loaded="Window_Loaded" Style="{StaticResource Win}" FocusManager.FocusedElement="{Binding ElementName=User_name_TB}" WindowStartupLocation="CenterScreen" Background="#FFB9C3DE">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Image Grid.ColumnSpan="2" Margin="-15,0" Source="/haies;component/Images/logo.png" />
+        <TextBlock Grid.Row="1" Text="اسم المستخدم :" Foreground="DarkRed" Style="{StaticResource Label_TextBlock}" />
+        <TextBlock Grid.Row="2" Text="كلمـة المرور :" Foreground="DarkRed" Style="{StaticResource Label_TextBlock}" />
+        <TextBox Grid.Column="1" Grid.Row="1" Name="User_name_TB" Style="{StaticResource Edit_TextBox}" PreviewKeyDown="User_name_TB_PreviewKeyDown" />
+        <PasswordBox Grid.Column="1" Grid.Row="2" Name="Password_TB" VerticalAlignment="Center" FontFamily="Arial" FontSize="16" PreviewKeyDown="Password_TB_PreviewKeyDown" />
+        <TextBlock Grid.Row="3" FontFamily="Arial" FontSize="14" VerticalAlignment="Center">
+            <Hyperlink Click="Hyperlink_Click">
+                تغيير كلمة المرور
+            </Hyperlink>
+        </TextBlock>
+        <Button Grid.Column="1" Grid.Row="3" Content="دخول" Name="Log_In" Click="Log_In_Click" />
+    </Grid>
+</Window>

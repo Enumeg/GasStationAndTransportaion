@@ -1,0 +1,19 @@
+﻿<Window x:Class="haies.Driver_Search"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" WindowStartupLocation="CenterScreen"     
+        SizeToContent="Manual" Title="البحث" Height="300" Width="400" Style="{StaticResource Win}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBox Name="Driver_Name_TB" TextChanged="Driver_Name_TB_TextChanged" Style="{StaticResource Edit_TextBox}" />
+        <DataGrid Grid.Row="1" Style="{StaticResource dgv3}" Name="Driver_DG" MouseDoubleClick="Driver_DG_MouseDoubleClick" HeadersVisibility="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="0" Visibility="Collapsed" Binding="{Binding Path=dri_id}" />
+                <DataGridTextColumn Width="*" IsReadOnly="True" Binding="{Binding Path=per_name}" Header="الإسم" />
+                <DataGridTextColumn Width="150" IsReadOnly="True" Binding="{Binding Path=per_mobile}" Header="الجوال" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

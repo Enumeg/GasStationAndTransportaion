@@ -1,0 +1,14 @@
+﻿<Page x:Class="haies.Gas_Price" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:cc="clr-namespace:Source;assembly=Source" mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="1000" Title="Cement" FlowDirection="RightToLeft" Background="{StaticResource Background1}" FontFamily="Arial" FontSize="18">
+    <Grid>
+        <DataGrid ColumnHeaderHeight="37" Style="{StaticResource dgv3}" Name="Cement_Prices_DG" CellEditEnding="Cement_Prices_DG_CellEditEnding">
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Collapsed" Binding="{Binding Path=gsp_id}" />
+                <DataGridTextColumn Width="Auto" IsReadOnly="True" Header="المحروق" Binding="{Binding Path=gas_name}" />
+                <DataGridTextColumn Width="Auto" Header="سعر الشراء" Binding="{Binding Path=gsp_buyCost}" />
+                <DataGridTextColumn Width="Auto" Header="ضريبة الشراء" Binding="{Binding Path=gsp_sellTax}" />
+                <DataGridTextColumn Width="Auto" Header="سعر البيع" Binding="{Binding Path=gsp_sellCost}" />
+                <DataGridTextColumn Width="Auto" Header="ضريبة البيع" Binding="{Binding Path=gsp_sellTax}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
