@@ -1,78 +1,127 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Source;
-using System.IO;
-using Microsoft.Win32;
-using System.Data;
 
 namespace haies
 {
     /// <summary>
-    /// Interaction logic for Product.xaml
+    /// Interaction logic for GasPrice.xaml
     /// </summary>
-    public partial class Gas_Price : Page
+    public partial class Gas_Price
     {
-        public Gas_Price()
+        private object _gspId;
+        public Gas_Price(object gspid = null)
         {
             InitializeComponent();
-            Fill_DG();
-
+            Gas.Get_All_Gas(Gas_CB);
+            Gas_CB.SelectedIndex = 0;
+            _gspId = gspid;
+            if (gspid != null)
+                Get_Gas_Price();
         }
-        private void Fill_DG()
+        private void Get_Gas_Price()
         {
             try
             {
-                DB db2 = new DB("gas_price");
-
-                Cement_Prices_DG.ItemsSource = db2.SelectTableView("select g.gas_name,gsp.* from gas_price gsp join gas g on gas_id=gsp_gas_id ");
+                var d = new DB();
+                d.AddCondition("gsp_id", _gspId);
+                var DR = d.SelectRow("select * from gas_price");
+                Gas_Date.Value = DateTime.Parse(DR["gsp_date"].ToString());
+                Gas_CB.SelectedValue = DR["gsp_gas_id"];
+                Sell_Price_TB.Text = DR["gsp_sellCost"].ToString();
+                Sell_Tax_TB.Text = DR["gsp_sell_Tax"].ToString();
+                Buy_Price_TB.Text = DR["gsp_buyCost"].ToString();
+                Buy_Tax_TB.Text = DR["gsp_buy_tax"].ToString();
             }
-            catch
+            catch (Exception ex)
             {
 
             }
         }
-        private void Cement_Prices_DG_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                DataRowView drv = Cement_Prices_DG.SelectedItem as DataRowView;
-                DB d = new DB("gas_price");
-                d.AddCondition("gsp_id", drv["gsp_id"]);
-                if (Cement_Prices_DG.Columns.IndexOf(e.Column) == 2)
+                if (Notify.validate("من فضلك ادخل التاريخ", Gas_Date.Text, this))
                 {
-                    d.AddColumn("gsp_buyCost", ((TextBox)e.Column.GetCellContent(e.Row)).Text);
+                    return;
                 }
-                else
+                if (Notify.validate("من فضلك اختر المحروق", Gas_CB.SelectedIndex, this))
                 {
-                    d.AddColumn("gsp_sellCost", ((TextBox)e.Column.GetCellContent(e.Row)).Text);
-
+                    return;
                 }
-                if (d.Update())
+                if (Notify.validate("من فضلك ادخل سعر البيع", Sell_Price_TB.Text, this))
                 {
-
+                    return;
+                }
+                if (Notify.validate("من فضلك ادخل سعر الشراء", Buy_Price_TB.Text, this))
+                {
+                    return;
+                }
+                if (Notify.validate("من فضلك ادخل ضريبة البيع", Sell_Tax_TB.Text, this))
+                {
+                    return;
+                }
+                if (Notify.validate("من فضلك ادخل ضريبة الشراء", Buy_Tax_TB.Text, this))
+                {
+                    return;
+                }
+                if (Add_Update())
+                {
                     var log = new Log();
-                    log.Columns.Add(new Column("المحروق", drv[1]));
-                    log.Columns.Add(new Column("سعر الشراء", d.Columns_Values[1].Name == "gsp_buyCost" ? d.Columns_Values[1].Value : drv[2]));
-                    log.Columns.Add(new Column("سعر البيع", d.Columns_Values[1].Name == "gsp_sellCost" ? d.Columns_Values[1].Value : drv[3]));
-                    log.CreateLog("أسعار المحروقات", false);
-                    Fill_DG();
+                    log.Columns.Add(new Column("التاريـخ", Gas_Date.Value.Value.Date.ToShortDateString()));
+                    log.Columns.Add(new Column("النوع", Gas_CB.Text));
+                    log.Columns.Add(new Column("سعر البيع", Sell_Price_TB.Text));
+                    log.Columns.Add(new Column("سعر الشراء", Buy_Price_TB.Text));
+                    log.Columns.Add(new Column("ضريبة البيع", Sell_Tax_TB.Text));
+                    log.Columns.Add(new Column("ضريبة الشراء", Buy_Tax_TB.Text));
+                    log.CreateLog("أسعار المحروقات", _gspId == null);
+                    if (New.IsChecked != null && (bool)New.IsChecked)
+                    {
+                        App.Clear_Form(this);
+                    }
+                    else
+                    {
+                        Close();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
+        public bool Add_Update()
+        {
+            try
+            {
+
+                var dataBase = new DB("Gas_price");
+
+                dataBase.AddColumn("gsp_date", Gas_Date.Value.Value.Date);
+                dataBase.AddColumn("gsp_gas_id", Gas_CB.SelectedValue);
+                dataBase.AddColumn("gsp_sellCost", Sell_Price_TB.Text.Trim());
+                dataBase.AddColumn("gsp_buyCost", Buy_Price_TB.Text.Trim());
+                dataBase.AddColumn("gsp_sell_tax", Sell_Tax_TB.Text.Trim());
+                dataBase.AddColumn("gsp_buy_tax", Buy_Tax_TB.Text.Trim());
+                if (_gspId == null)
+                {
+                    if (dataBase.IsNotExist("gsp_id", "gsp_date", "gsp_gas_id"))
+                    {
+                        return Confirm.Check(dataBase.Insert());
+                    }
+                    Message.Show("لقد تم تسجيل هذا السعر من قبل", MessageBoxButton.OK, 5);
+                    return false;
+                }
+                dataBase.AddCondition("gsp_id", _gspId);
+                return Confirm.Check(dataBase.Update());
             }
             catch
             {
-
+                //MessageBox.Show("kiki_method");
+                return false;
             }
         }
+
     }
 }

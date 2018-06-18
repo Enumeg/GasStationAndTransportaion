@@ -147,12 +147,13 @@ namespace haies
             {
                 DB db = new DB();
                 db.AddCondition("pmr_date", Date_TB.Value.Value.Date, false, "=", "Today");
-                Value_TB.Text = decimal.Parse(db.Select(@"select COALESCE(sum(pms_amount*gsp_sellCost),0) +
+                Value_TB.Text = decimal.Parse(db.Select(@"select COALESCE(sum(pms_amount*gsp_sellCost),0)   +
                                            (select COALESCE(sum(cstl_value),0) from customer_loans where cstl_date=@Today)-(
-                                           (select COALESCE(sum(sin_cost),0) from station_income where sin_date=@Today)+
+                                           (select COALESCE(sum(sin_amount*gsp_sellCost),0) from station_income
+                                            join gas_price on sin_price_id = gsp_id where sin_date=@Today)+
                                            (select COALESCE(sum(sout_value),0) from station_outcome where sout_date=@Today))
                                            from pump_sales ps join pumps p on ps.pms_pum_id=p.pum_id
-                                           join gas g on g.gas_id=p.pum_gas_id join gas_price on gsp_gas_id = gas_id where pms_date=@Today").ToString()).ToString("0.00");
+                                           join gas_price on pms_price_id = gsp_id where pms_date=@Today").ToString()).ToString("0.00");
 
             }
             catch

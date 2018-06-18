@@ -32,7 +32,7 @@ namespace haies
                 {
                     decimal.TryParse(db.Select(@"select COALESCE(sum(cstl_value),0)  + (select COALESCE(sum(trc_value),0) from transactions where trc_ref = 0 and 
                                                 trc_direction = 0 and trc_person=@per_id and trc_date <@Date)
-                                                -(select COALESCE(sum(sin_cost),0) from station_income where sin_date<@Date and sin_cust_id=@cst_id)
+                                                -(select COALESCE(sum(sin_amount*gsp_sellCost),0) from station_income where sin_date<@Date and sin_cust_id=@cst_id)
                                                  from customer_loans where cstl_date<@Date and cstl_cust_id=@cst_id; ").ToString(), out Balance);
 
                 }
@@ -88,7 +88,10 @@ namespace haies
                 }
                 else
                 {
-                    ds = db.SelectSet(@"select s.*,gas_name from station_income s join gas on gas_id=sin_gas_id where sin_date>=@SD and sin_date<=@ED and sin_cust_id=@cust_id order by sin_date;
+                    ds = db.SelectSet(@"select s.sin_id,sin_date,sin_amount,gas_name,(sin_amount*gsp_sellCost) as sin_cost
+                                        from station_income s join gas on gas_id=sin_gas_id 
+                                        join gas_price p on s.sin_price_id = p.gsp_id 
+                                        where sin_date>=@SD and sin_date<=@ED and sin_cust_id=@cust_id order by sin_date;
                                         select * from customer_loans where cstl_date>=@SD and cstl_date<=@ED and cstl_cust_id=@cust_id  union all
                                         select trc_id,trc_person,trc_date,trc_value,trc_description from transactions where trc_ref = 0 and trc_direction = 0 
                                         and trc_person=@per_id and trc_date>=@SD and trc_date<=@ED order by cstl_date");
@@ -102,21 +105,14 @@ namespace haies
                 {
                     Totals[2] += decimal.Parse(row["cstl_value"].ToString());
                 }
-                if (Customer_Type == Customer_type.مصنع)
-                {
-                    Out_DataGrid.ItemsSource = ds.Tables[0].DefaultView;
-                }
-                else
-                {
-                    Out_DataGrid.ItemsSource = ds.Tables[0].DefaultView;
-                }                
+                Out_DataGrid.ItemsSource = ds.Tables[0].DefaultView;                
                 In_DataGrid.ItemsSource = ds.Tables[1].DefaultView;
                 Totals[0] = Get_Balance(Customer_Type, Cust_Id, Per_Id, From);
                 Totals[3] = Totals[1] - Totals[2];
                 Totals[4] = Totals[3] + Totals[0];
 
             }
-            catch
+            catch (Exception ex)
             {
 
             }

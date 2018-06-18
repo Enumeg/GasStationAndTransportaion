@@ -22,7 +22,7 @@ namespace haies
         Customer Customer_Station_Page = new Customer(Customer_type.محطة);
         Gas_Page Gas_Page = new Gas_Page();
         Pumps Pumps_Page = new Pumps();
-        Gas_Price Gas_Price_Page = new Gas_Price();
+        Gas_Prices Gas_Price_Page = new Gas_Prices();
         Clients Clients_Page = new Clients();
         Employees Employees_Page = new Employees();
         Salaries Salaries_Page = new Salaries();

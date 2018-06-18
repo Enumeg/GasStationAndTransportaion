@@ -96,7 +96,7 @@ namespace haies
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-         
+
             CultureInfo c = new CultureInfo("ar-EG");
             NumberFormatInfo n = new NumberFormatInfo();
             n.DigitSubstitution = DigitShapes.NativeNational;
@@ -116,7 +116,8 @@ namespace haies
             Accounts.Rows.Add("المستحقات", (int)Account_Types.Due_Off + 1, (int)Account_Types.Due + 1);
             Accounts.Rows.Add("السلف", (int)Account_Types.Advance_Off + 1, (int)Account_Types.Advance + 1);
             Source.DB.OpenConnection();
-            var l =new Main(); //new Main(); 
+            App.User = new User { Id = 1, GroupId = "1", Name = "test" };
+            var l = new login(); //new Main(); 
             l.ShowDialog();
 
 

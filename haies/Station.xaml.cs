@@ -20,7 +20,7 @@ namespace haies
     {
         public static Operations Mode = Operations.Add;
         List<Page> Pages;       
-        Pump_read Pump_read_Page;
+        PumpRead Pump_read_Page;
         Station_Income Station_Income_Page;
         Station_Outcome Station_Outcome_Page;
         Station_Purchases Station_Purchases_Page;
@@ -34,7 +34,7 @@ namespace haies
             if (mode == Operations.Add)
             {
                 
-                Pump_read_Page = new Pump_read();
+                Pump_read_Page = new PumpRead();
                 Station_Income_Page = new Station_Income();
                 Station_Outcome_Page = new Station_Outcome();
                 Station_Purchases_Page = new Station_Purchases();

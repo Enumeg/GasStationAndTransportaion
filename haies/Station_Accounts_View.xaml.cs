@@ -14,10 +14,13 @@ namespace haies
     {
         DataTable Pumps = new DataTable();
         DataTable Gas_Price = new DataTable();
+        private StationAccounts _stationAccounts;
         int SelectedIndex = 0;
         public Station_Accounts_View()
         {
             InitializeComponent();
+            _stationAccounts = new StationAccounts();
+
             Pumps.Columns.Add("pmr_id"); Pumps.Columns.Add("pmr_date", typeof(DateTime)); Pumps.Columns.Add("gas_name"); Pumps.Columns.Add("pum_number");
             Pumps.Columns.Add("pmr_today", typeof(decimal)); Pumps.Columns.Add("pmr_yesterday", typeof(decimal));
             Pumps.Columns.Add("pmr_amount", typeof(decimal)); Pumps.Columns.Add("pmr_value", typeof(decimal));
@@ -146,6 +149,8 @@ namespace haies
                 print.printedDataTable.Add(new DataTable());
                 print.FooterTable.Add("الرصــــيد السابــــق :", Last_Bal_TK.Text);
                 print.FooterTable.Add("إجمالــي المبيعــــات :", Total_Sales_TK.Text);
+                print.FooterTable.Add("ضريبة المبيعــــات :", Sales_Tax_TK.Text);
+                print.FooterTable.Add("صافي المبيعــــات :", Net_Sales_TK.Text);
                 print.FooterTable.Add("المبيعــــات الآجلـــة :", Futures_Sales_TK.Text);
                 print.FooterTable.Add("المبيـعــات النقـديـــة :", cash_Sales_TK.Text);
                 print.FooterTable.Add("إجمالي المدفوعــات :", Payments_TK.Text);
@@ -154,6 +159,8 @@ namespace haies
                 print.FooterTable.Add("إجمالي إيداع البنــك :", Bank_TK.Text);
                 print.FooterTable.Add("الرصيــــــــــــــــــد :", Balance_TK.Text);
                 print.FooterTable.Add("إجمالي المشتريـــات :", Total_Purchases_TK.Text);
+                print.FooterTable.Add("ضريبة المشتريـــات :", Purchases_Tax_TK.Text);
+                print.FooterTable.Add("صافي المشتريـــات :", Net_Purchases_TK.Text);
 
                 print.print();
             }
@@ -183,62 +190,14 @@ namespace haies
         }
         private void Fill_Pumps()
         {
-            Pumps.Rows.Clear();
-            DateTime date = From_DTP.Value.Value.Date;
-            decimal value = 0, total_value = 0;
-            try
-            {
-                DB db1 = new DB();
-                Gas_Price = db1.SelectTable("select gsp_sellCost from gas_price join gas on gsp_gas_id=gas_id join pumps on gas_id=pum_gas_id group by pum_id order by pum_id");
-                DB db = new DB();
-                DataSet ds = new DataSet();
-                db.AddCondition("pmr_date", From_DTP.Value.Value.Date, false, "=", "Today");
-                db.AddCondition("pmr_date", From_DTP.Value.Value.Date.AddDays(-1), false, "=", "Yrday");
-                while (date <= To_DTP.Value.Value.Date)
-                {
-                    db.Conditions[0].Value = date;
-                    db.Conditions[1].Value = date.AddDays(-1);
-
-                    ds = db.SelectSet(@"select pmr_id,pmr_date,gas_name,pum_number,pmr_value from pump_read join pumps on pum_id=pmr_pum_id join gas on gas_id=pum_gas_id 
-                                        where pmr_date=@Today order by pmr_pum_id; 
-                                        select COALESCE(pmr_value,0) pmr_value from pump_read where pmr_date=@Yrday order by pmr_pum_id; ");
-                    if (ds.Tables[1].Rows.Count > 0)
-                    {
-                        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                        {
-                            value = Get_Pump_Value(ds.Tables[0].Rows[i]["pmr_value"], ds.Tables[1].Rows[i]["pmr_value"]);
-                            Pumps.Rows.Add(ds.Tables[0].Rows[i]["pmr_id"], ds.Tables[0].Rows[i]["pmr_date"], ds.Tables[0].Rows[i]["gas_name"], ds.Tables[0].Rows[i]["pum_number"],
-                               ds.Tables[0].Rows[i]["pmr_value"], ds.Tables[1].Rows[i]["pmr_value"], value, Math.Round(value * decimal.Parse(Gas_Price.Rows[i][0].ToString()), 2));
-                            total_value += value * decimal.Parse(Gas_Price.Rows[i][0].ToString());
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                        {
-                            value = Get_Pump_Value(ds.Tables[0].Rows[i]["pmr_value"], 0);
-                            Pumps.Rows.Add(ds.Tables[0].Rows[i]["pmr_id"], ds.Tables[0].Rows[i]["pmr_date"], ds.Tables[0].Rows[i]["gas_name"], ds.Tables[0].Rows[i]["pum_number"],
-                               ds.Tables[0].Rows[i]["pmr_value"], 0, value, Math.Round(value * decimal.Parse(Gas_Price.Rows[i][0].ToString()), 2));
-                            total_value += value * decimal.Parse(Gas_Price.Rows[i][0].ToString());
-                        }
-                    }
-                    date = date.AddDays(1);
-                }
-                Pumps.Rows.Add();
-                Pumps.Rows[Pumps.Rows.Count - 1]["pmr_value"] = Math.Round(total_value, 2);
-                Pumps_DG.ItemsSource = Pumps.DefaultView;
-            }
-            catch
-            {
-
-            }
+            Pumps_DG.ItemsSource = _stationAccounts.ListPumps(From_DTP.Value.Value.Date, To_DTP.Value.Value.Date);
         }
 
         private void Pumps_EP_Add(object sender, EventArgs e)
         {
             try
             {
-                Pump_read o = new Pump_read();
+                PumpRead o = new PumpRead();
                 Station s = new Station(o, Operations.Edit);
                 s.ShowDialog();
                 Fill_Pumps();
@@ -254,7 +213,7 @@ namespace haies
             {
                 if (Pumps_DG.SelectedIndex != -1)
                 {
-                    Station s = new Station(new Pump_read(((DataRowView)Pumps_DG.SelectedItem)["pmr_id"]), Operations.Edit);
+                    Station s = new Station(new PumpRead(((DataRowView)Pumps_DG.SelectedItem)["pmr_id"]), Operations.Edit);
                     s.ShowDialog();
                     Fill_Pumps();
                 }
@@ -302,25 +261,7 @@ namespace haies
         #region Sales
         private void Fill_Sales()
         {
-            DB db = new DB();
-            try
-            {
-                db.AddCondition("sin_date", From_DTP.Value.Value.Date, false, ">=", "SD");
-                db.AddCondition("sin_date", To_DTP.Value.Value.Date, false, "<=", "ED");
-
-                DataSet ds = db.SelectSet(@"select si.*,g.gas_name,p.per_name custo from station_income si join gas g on gas_id=sin_gas_id                                            
-                                            join customer cu on cust_id=sin_cust_id 
-                                            join persons p on per_id = cust_per_id
-                                            where sin_date>=@SD and sin_date<=@ED order by sin_date;
-                                            select COALESCE(sum(sin_cost),0) from station_income where sin_date>=@SD and sin_date<=@ED;");
-                ds.Tables[0].Rows.Add();
-                ds.Tables[0].Rows[ds.Tables[0].Rows.Count - 1]["sin_cost"] = ds.Tables[1].Rows[0][0];
-                Sales_DG.ItemsSource = ds.Tables[0].DefaultView;
-            }
-            catch
-            {
-
-            }
+            Sales_DG.ItemsSource = _stationAccounts.ListSales(From_DTP.Value.Value.Date, To_DTP.Value.Value.Date);
         }
         private void Sales_EP_Add(object sender, EventArgs e)
         {
@@ -390,24 +331,7 @@ namespace haies
         #region Outcome
         private void Fill_Outcome()
         {
-            DB db = new DB();
-            try
-            {
-
-                db.AddCondition("trs_date", From_DTP.Value.Value.Date, false, ">=", "SD");
-                db.AddCondition("trs_date", To_DTP.Value.Value.Date, false, "<=", "ED");
-
-
-                DataSet ds = db.SelectSet(@"select s.* from station_outcome s where sout_date>=@SD and sout_date<=@ED order by sout_date;
-                                            select COALESCE(sum(sout_value),0) from station_outcome where sout_date>=@SD and sout_date<=@ED;");
-                ds.Tables[0].Rows.Add();
-                ds.Tables[0].Rows[ds.Tables[0].Rows.Count - 1]["sout_value"] = ds.Tables[1].Rows[0][0];
-                Outcome_DG.ItemsSource = ds.Tables[0].DefaultView;
-            }
-            catch
-            {
-
-            }
+            Outcome_DG.ItemsSource = _stationAccounts.ListOutcome(From_DTP.Value.Value.Date, To_DTP.Value.Value.Date);
         }
         private void Outcome_EP_Add(object sender, EventArgs e)
         {
@@ -476,23 +400,7 @@ namespace haies
         #region Purchases
         private void Fill_Purchases()
         {
-            DB db = new DB();
-            try
-            {
-                db.AddCondition("pur_date", From_DTP.Value.Value.Date, false, ">=", "SD");
-                db.AddCondition("pur_date", To_DTP.Value.Value.Date, false, "<=", "ED");
-
-                DataSet ds = db.SelectSet(@"select pur.*,g.gas_name from purchases pur join gas g on pur_gas_id=gas_id                
-                                            where pur_date>=@SD and pur_date<=@ED order by pur_date;
-                                            select COALESCE(sum(pur_totalCost),0) from purchases where pur_date>=@SD and pur_date<=@ED;");
-                ds.Tables[0].Rows.Add();
-                ds.Tables[0].Rows[ds.Tables[0].Rows.Count - 1]["pur_totalCost"] = ds.Tables[1].Rows[0][0];
-                Purchases_DG.ItemsSource = ds.Tables[0].DefaultView;
-            }
-            catch
-            {
-
-            }
+            Purchases_DG.ItemsSource = _stationAccounts.ListPurchases(From_DTP.Value.Value.Date, To_DTP.Value.Value.Date);
         }
         private void Purchases_EP_Add(object sender, EventArgs e)
         {
@@ -560,27 +468,7 @@ namespace haies
         #region Customers_Payments
         private void Fill_Payment()
         {
-            try
-            {
-                DB db = new DB("customer_loans");
-                db.AddCondition("cstl_date", From_DTP.Value.Value.Date, false, ">=", "SD");
-                db.AddCondition("cstl_date", To_DTP.Value.Value.Date, false, "<=", "ED");
-
-                DataSet ds = db.SelectSet(@"select cl.*,p.per_name name from customer_loans cl join customer c on c.cust_id=cl.cstl_cust_id and cust_type=1                                                   
-                                                    join persons p on p.per_id=c.cust_per_id where cstl_date>=@SD and cstl_date<=@ED order by cstl_date; 
-                                                    select COALESCE(sum(cstl_value),0) from customer_loans join customer on cust_id=cstl_cust_id and cust_type=1
-                                                    where cstl_date>=@SD and cstl_date<=@ED ;");
-
-
-                ds.Tables[0].Rows.Add();
-                ds.Tables[0].Rows[ds.Tables[0].Rows.Count - 1]["cstl_value"] = ds.Tables[1].Rows[0][0];
-                Customer_Payment_DG.ItemsSource = ds.Tables[0].DefaultView;
-
-            }
-            catch
-            {
-
-            }
+            Customer_Payment_DG.ItemsSource = _stationAccounts.ListPayments(From_DTP.Value.Value.Date, To_DTP.Value.Value.Date);          
         }
 
         private void Receipt_EP_Add(object sender, EventArgs e)
@@ -651,22 +539,7 @@ namespace haies
         #region Bank
         private void Fill_Bank()
         {
-            DB db = new DB();
-            try
-            {
-                db.AddCondition("bnk_date", From_DTP.Value.Value.Date, false, ">=", "SD");
-                db.AddCondition("bnk_date", To_DTP.Value.Value.Date, false, "<=", "ED");
-
-                DataSet ds = db.SelectSet(@"select * from bank where bnk_date>=@SD and bnk_date<=@ED order by bnk_date;
-                                            select COALESCE(sum(bnk_value),0) from bank where bnk_date>=@SD and bnk_date<=@ED;");
-                ds.Tables[0].Rows.Add();
-                ds.Tables[0].Rows[ds.Tables[0].Rows.Count - 1]["bnk_value"] = ds.Tables[1].Rows[0][0];
-                Bank_DG.ItemsSource = ds.Tables[0].DefaultView;
-            }
-            catch
-            {
-
-            }
+            Bank_DG.ItemsSource = _stationAccounts.ListBank(From_DTP.Value.Value.Date, To_DTP.Value.Value.Date);
         }
         private void Bank_EP_Add(object sender, EventArgs e)
         {
@@ -739,61 +612,33 @@ namespace haies
             try
             {
 
-                DB db = new DB();
-                db.AddCondition("sin_date", From_DTP.Value.Value.Date, false, ">=", "SD");
-                db.AddCondition("sin_date", To_DTP.Value.Value.Date, false, "<=", "ED");
-                DataSet ds = db.SelectSet(@"select COALESCE(sum(sin_cost),0) from station_income where sin_date>=@SD and sin_date<=@ED ;
-                                            select COALESCE(sum(sout_value),0) from station_outcome where sout_date>=@SD and sout_date<=@ED;
-                                            select COALESCE(sum(pur_totalCost),0) from purchases where pur_date>=@SD and pur_date<=@ED;
-                                            select COALESCE(sum(bnk_value),0) from bank where bnk_date>=@SD and bnk_date<=@ED;
-                                            select COALESCE(sum(cstl_value),0) from customer_loans join customer on cust_id=cstl_cust_id 
-                                            and cust_type=1 where cstl_date>=@SD and cstl_date<=@ED;
-                                            select COALESCE(sum(pms_amount*gsp_sellCost),0) from pump_sales ps join pumps p on ps.pms_pum_id=p.pum_id
-                                            join gas g on g.gas_id=p.pum_gas_id join gas_price on gsp_gas_id = gas_id where pms_date>=@SD and pms_date<=@ED;");
+                var model = _stationAccounts.GetAccounts(From_DTP.Value.Value.Date, To_DTP.Value.Value.Date);
+                Last_Bal_TK.Text = model.LastBalance.ToString("0.00");
+                Total_Sales_TK.Text = model.Sales.ToString("0.00");
+                Sales_Tax_TK.Text = model.SalesTax.ToString("0.00");
+                Net_Sales_TK.Text = model.NetSales.ToString("0.00");
+                Futures_Sales_TK.Text = model.FutureSales.ToString("0.00");
+                cash_Sales_TK.Text = model.CashSales.ToString("0.00");
+                Total_Outcome_TK.Text = model.Outcome.ToString("0.00");
+                Total_Purchases_TK.Text = model.Purchases.ToString("0.00");
+                Purchases_Tax_TK.Text = model.PurchasesTax.ToString("0.00");
+                Net_Purchases_TK.Text = model.NetPurchases.ToString("0.00");
+                Bank_TK.Text = model.Bank.ToString("0.00");
+                Payments_TK.Text = model.Payment.ToString("0.00");
+                Total_Income_TK.Text = model.Income.ToString("0.00");
+                Balance_TK.Text = model.Balance.ToString("0.00");
+                TotalSales_TK.Text = model.Sales.ToString("0.00");
+                SalesTax_TK.Text = model.SalesTax.ToString("0.00");
+                NetSales_TK.Text = model.NetSales.ToString("0.00");
+                TotalPurchases_TK.Text = model.Purchases.ToString("0.00");
+                PurchasesTax_TK.Text = model.PurchasesTax.ToString("0.00");
+                NetPurchases_TK.Text = model.NetPurchases.ToString("0.00");
 
-                Last_Balance = Get_Last_Balance();
-                Total_Sales = decimal.Parse(ds.Tables[5].Rows[0][0].ToString());
-                Last_Bal_TK.Text = Last_Balance.ToString("0.00");
-                Total_Sales_TK.Text = Total_Sales.ToString("0.00");
-                Futures_Sales_TK.Text = decimal.Parse(ds.Tables[0].Rows[0][0].ToString()).ToString("0.00");
-                cash_Sales_TK.Text = (Total_Sales - decimal.Parse(ds.Tables[0].Rows[0][0].ToString())).ToString("0.00");
-                Total_Outcome_TK.Text = decimal.Parse(ds.Tables[1].Rows[0][0].ToString()).ToString("0.00");
-                Total_Purchases_TK.Text = decimal.Parse(ds.Tables[2].Rows[0][0].ToString()).ToString("0.00");
-                Bank_TK.Text = decimal.Parse(ds.Tables[3].Rows[0][0].ToString()).ToString("0.00");
-                Payments_TK.Text = decimal.Parse(ds.Tables[4].Rows[0][0].ToString()).ToString("0.00");
-                Total_Income_TK.Text = (Total_Sales - decimal.Parse(ds.Tables[0].Rows[0][0].ToString())
-                                                     - decimal.Parse(ds.Tables[1].Rows[0][0].ToString())
-                                                     + decimal.Parse(ds.Tables[4].Rows[0][0].ToString())).ToString("0.00");
-                Balance_TK.Text = (Total_Sales + Last_Balance - decimal.Parse(ds.Tables[0].Rows[0][0].ToString())
-                                                               - decimal.Parse(ds.Tables[1].Rows[0][0].ToString())
-                                                               - decimal.Parse(ds.Tables[3].Rows[0][0].ToString())
-                                                               + decimal.Parse(ds.Tables[4].Rows[0][0].ToString())).ToString("0.00");
             }
             catch
             {
 
             }
-        }
-        private decimal Get_Last_Balance()
-        {
-            decimal Balance = 0;
-            try
-            {
-                DB db = new DB();
-                db.AddCondition("pmr_date", From_DTP.Value.Value.Date, false, "<", "Today");
-                decimal.TryParse(db.Select(@"select COALESCE(sum(pms_amount*gsp_sellCost),0) 
-                                         + (select COALESCE(sum(cstl_value),0) from customer_loans join customer on cust_id=cstl_cust_id and cust_type=1 where cstl_date<@Today)
-                                         -((select COALESCE(sum(sin_cost),0) from station_income where sin_date<@Today)                                            
-                                         + (select COALESCE(sum(sout_value),0) from station_outcome where sout_date<@Today)                                            
-                                         + (select COALESCE(sum(bnk_value),0) from bank where bnk_date<@Today))                                           
-                                         from pump_sales ps join pumps p on ps.pms_pum_id=p.pum_id
-                                         join gas g on g.gas_id=p.pum_gas_id join gas_price on gsp_gas_id = gas_id where pms_date<@Today;").ToString(), out Balance);
-            }
-            catch
-            {
-
-            }
-            return Balance;
         }
 
         #endregion

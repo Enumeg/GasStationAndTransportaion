@@ -27,41 +27,57 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <TextBlock Text="التــــاريخ :" Style="{StaticResource Label_TextBlock}" />
             <TextBlock Text="Date :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
             <TextBlock Grid.Row="1" Text="الرصــــيد السابــــق :" Style="{StaticResource Label_TextBlock}" />
             <TextBlock Grid.Row="2" Text="إجمالــي المبيعــــات :" Style="{StaticResource Label_TextBlock}" />
-            <TextBlock Grid.Row="3" Text="إجمالي المدفوعــات :" Style="{StaticResource Label_TextBlock}" />
-            <TextBlock Grid.Row="4" Text="المبيعــــات الآجلـــة :" Style="{StaticResource Label_TextBlock}" />
-            <TextBlock Grid.Row="5" Text="المبيـعــات النقـديـــة :" Style="{StaticResource Label_TextBlock}" />        
-            <TextBlock Grid.Row="6" Text="إجمالي المصروفات :" Style="{StaticResource Label_TextBlock}" />                
-            <TextBlock Grid.Row="7" Text="صافي دخل المحطة:" Style="{StaticResource Label_TextBlock}" />
-            <TextBlock Grid.Row="8" Text="إجمالي إيداع البنــك :" Style="{StaticResource Label_TextBlock}" />
-            <TextBlock Grid.Row="9" Text="الرصيــــــــــــــــــد :" Style="{StaticResource Label_TextBlock}" />
-            <TextBlock Grid.Row="10" Text="إجمالي المشتريـــات :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="3" Text="ضريبة المبيعــــات :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="4" Text="صافي المبيعــــات :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="5" Text="إجمالي المدفوعــات :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="6" Text="المبيعــــات الآجلـــة :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="7" Text="المبيـعــات النقـديـــة :" Style="{StaticResource Label_TextBlock}" />        
+            <TextBlock Grid.Row="8" Text="إجمالي المصروفات :" Style="{StaticResource Label_TextBlock}" />                
+            <TextBlock Grid.Row="9" Text="صافي دخل المحطة:" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="10" Text="إجمالي إيداع البنــك :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="11" Text="الرصيــــــــــــــــــد :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="12" Text="إجمالي المشتريـــات :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="13" Text="ضريبة المشتريـــات :" Style="{StaticResource Label_TextBlock}" />
+            <TextBlock Grid.Row="14" Text="صافي المشتريـــات :" Style="{StaticResource Label_TextBlock}" />
             <TextBlock Grid.Row="1" Text="Last Balance :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
             <TextBlock Grid.Row="2" Text="Total Sales :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
-            <TextBlock Grid.Row="3" Text="Total Payments :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
-            <TextBlock Grid.Row="4" Text="Futures Sales :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
-            <TextBlock Grid.Row="5" Text="cash Sales :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
-            <TextBlock Grid.Row="6" Text="Total Outcome :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
-            <TextBlock Grid.Row="7" Text="Total Income :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
-            <TextBlock Grid.Row="8" Text="Bank Deposits :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
-            <TextBlock Grid.Row="9" Text="Balance :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
-            <TextBlock Grid.Row="10" Text="Total Purchases :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="3" Text="Sales Tax :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="4" Text="Net Sales :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="5" Text="Total Payments :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="6" Text="Futures Sales :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="7" Text="cash Sales :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="8" Text="Total Outcome :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="9" Text="Total Income :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="10" Text="Bank Deposits :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="11" Text="Balance :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="12" Text="Total Purchases :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="13" Text="Purchases tax:" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
+            <TextBlock Grid.Row="14" Text="Net Purchases :" Style="{StaticResource Eng_Label_TextBlock}" Grid.Column="2" />
             <ex:DateTimePicker Grid.Column="1" Grid.Row="0" Name="Date_TB" Style="{StaticResource Default_DateTimePicker}" ValueChanged="Date_TB_ValueChanged" />
             <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Last_Bal_TK" />
             <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Sales_TK" />
-            <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Payments_TK" />
-            <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Futures_Sales_TK" />
-            <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="cash_Sales_TK" />    
-            <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Outcome_TK" />
-            <TextBlock Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Income_TK" />
-            <TextBlock Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Bank_TK" />
-            <TextBlock Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Balance_TK" />
-            <TextBlock Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Purchases_TK" />
-            <Button Grid.Row="11" Grid.Column="1" Content="Print" Click="Button_Click" />
+            <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Sales_Tax_TK" />
+            <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Net_Sales_TK" />
+            <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Payments_TK" />
+            <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Futures_Sales_TK" />
+            <TextBlock Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="cash_Sales_TK" />    
+            <TextBlock Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Outcome_TK" />
+            <TextBlock Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Income_TK" />
+            <TextBlock Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Bank_TK" />
+            <TextBlock Grid.Row="11" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Balance_TK" />
+            <TextBlock Grid.Row="12" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Total_Purchases_TK" />
+            <TextBlock Grid.Row="13" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Purchases_Tax_TK" />
+            <TextBlock Grid.Row="14" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource Eng_Label_TextBlock}" Name="Net_Purchases_TK" />
+            <Button Grid.Row="15" Grid.Column="1" Content="Print" Click="Button_Click" />
         </Grid>
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <Grid>
@@ -131,7 +147,7 @@
                             <DataGridTextColumn Width="Auto" Binding="{Binding Path=custo}" Header="Customer" />
                             <DataGridTextColumn Width="Auto" Binding="{Binding Path=gas_name}" Header="Gas" />
                             <DataGridTextColumn Width="Auto" Binding="{Binding Path=sin_amount}" Header="Amount" CellStyle="{StaticResource DGCLA}"/>
-                            <DataGridTextColumn Width="Auto" Binding="{Binding Path=sin_cost}" Header="Price" CellStyle="{StaticResource DGCLA}"/>
+                            <DataGridTextColumn Width="Auto" Binding="{Binding Path=sin_cost, StringFormat=0.000}" Header="Price" CellStyle="{StaticResource DGCLA}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Border Grid.Column="1" Grid.RowSpan="2" Background="Black" />

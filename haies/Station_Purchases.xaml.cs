@@ -58,23 +58,25 @@ namespace haies
 
         private decimal Get_Buy()
         {
-            decimal value = 0;
-            try
-            {
-                DB db2 = new DB("gas_price");
+                decimal value = 0;
+                try
+                {
+                    var db2 = new DB("gas_price");
 
-                db2.SelectedColumns.Add("gsp_buyCost");
+                    db2.AddCondition("gsp_gas_id", Gas_CB.SelectedValue);
+                    db2.AddCondition("gas_date", Date_TB.Value.Value.Date);
+                    var result = db2.Select("select gsp_Id from gas_price where gsp_date = (select max(gsp_date) from gas_price where gsp_date <= @gas_date) and gsp_gas_id = @gsp_gas_id");
 
-                db2.AddCondition("gsp_gas_id", Gas_CB.SelectedValue);
+                    decimal.TryParse(result.ToString(), out value);
 
-                decimal.TryParse(db2.Select().ToString(), out value);
 
-            }
-            catch
-            {
+                }
+                catch
+                {
 
-            }
-            return value;
+                }
+                return value;
+            
         }
 
         private void add_update_outcome_Click(object sender, RoutedEventArgs e)
@@ -129,7 +131,7 @@ namespace haies
                 DataBase.AddColumn("pur_date", Date_TB.Text);
                 DataBase.AddColumn("pur_amount", Value_TB.Text);
                 DataBase.AddColumn("pur_gas_id", Gas_CB.SelectedValue);
-                DataBase.AddColumn("pur_totalCost", decimal.Parse(Value_TB.Text) * Get_Buy());
+                DataBase.AddColumn("pur_price_id", Get_Buy());
 
 
                 if (this.Purchase_Id == null)

@@ -23,7 +23,6 @@ namespace haies
     {
         object Income_Id;
 
-
         public Station_Income(object income_Id=null)
         {
             InitializeComponent();
@@ -32,7 +31,7 @@ namespace haies
             Customer.Get_All_Customers(Customer_CB, Customer_type.محطة);
             Customer_CB.SelectedIndex = 0;
             Get_Income();
-
+            
         }
 
         private void Get_Income()
@@ -51,7 +50,7 @@ namespace haies
                 Customer_CB.SelectedValue = DR["sin_cust_id"];
                 Gas_CB.SelectedValue = DR["sin_gas_id"];
                 Amount_TB.Text = DR["sin_amount"].ToString();
-
+             
             }
             catch
             {
@@ -119,19 +118,18 @@ namespace haies
             }
         }
 
-        private Decimal Get_Buy()
+        private Decimal Get_Sale_Price()
         {
             decimal value = 0;
             try
             {
-                DB db2 = new DB("gas_price");
-
-                db2.SelectedColumns.Add("gsp_sellCost");
+                var db2 = new DB("gas_price");
 
                 db2.AddCondition("gsp_gas_id", Gas_CB.SelectedValue);
+                db2.AddCondition("gas_date", Date_TB.Value.Value.Date);
+               var result =  db2.Select("select gsp_Id from gas_price where gsp_date = (select max(gsp_date) from gas_price where gsp_date <= @gas_date) and gsp_gas_id = @gsp_gas_id");
 
-
-                decimal.TryParse(db2.Select().ToString(), out value);
+                decimal.TryParse(result.ToString(), out value);
 
 
             }
@@ -141,7 +139,6 @@ namespace haies
             }
             return value;
         }
-
 
         public bool Add_Update()
         {
@@ -154,7 +151,7 @@ namespace haies
                 DataBase.AddColumn("sin_date", Date_TB.Text);
                 DataBase.AddColumn("sin_amount", Amount_TB.Text);
                 DataBase.AddColumn("sin_gas_id", Gas_CB.SelectedValue);
-                DataBase.AddColumn("sin_cost", decimal.Parse(Amount_TB.Text) * Get_Buy());
+                DataBase.AddColumn("sin_price_id", Get_Sale_Price());
 
 
                 if (this.Income_Id == null)
